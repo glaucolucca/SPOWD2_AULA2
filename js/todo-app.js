@@ -58,4 +58,27 @@ function addTodo(todoText){
     todos.push(newTodo);
 }
 
+let filterOn = false;
+
+const applyFilter = () => {
+  const items = document.getElementById("todo-list").children;
+  for (let item of items) {
+    if (filterOn && item.style.textDecoration !== "line-through") {
+      item.style.display = "none";
+    } else {
+      item.style.display = "";
+    }
+  }
+}
+
+const filterButton = document.createElement("button");
+filterButton.textContent = "Atividades concluídas";
+filterButton.onclick = () => {
+  filterOn = !filterOn;
+  filterButton.textContent = filterOn ? "Todas as atividades" : "Atividades concluídas";
+  applyFilter();
+}
+
+document.getElementById("todo-list").parentNode.appendChild(filterButton);
+
 renderTodos();
